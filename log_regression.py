@@ -7,7 +7,7 @@ import pandas as pd
 
 # Prepare data
 
-with open('ex2/ex2data1.csv', 'r') as f:
+with open('data/ex2/ex2data1.csv', 'r') as f:
     reader = csv.reader(f)
     your_list = list(reader)
     
