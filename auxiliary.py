@@ -121,6 +121,8 @@ def dot(x,y):
 #plt.plot(x, map(square_derivative,x),'r+',label='Estimate')
 #plt.legend(loc=9)
 #plt.show
+    
+
 
 
   

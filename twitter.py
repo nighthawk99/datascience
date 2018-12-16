@@ -47,8 +47,6 @@ print(top_hashtags.most_common(10))
 
 
 
-
-
 #twitter = Twython(CONSUMER_KEY, CONSUMER_SECRET)
 #
 #for status in twitter.search(q= '"Angela Merkel"', lang='de')["statuses"]:
