@@ -8,11 +8,10 @@ Created on Fri Sep 28 21:24:20 2018
 from twython import Twython
 from twython import TwythonStreamer
 import collections
+import simplejson as json
 
-CONSUMER_KEY = "dqB5PMOukOgS6v48rrHYIlaTa"
-CONSUMER_SECRET = "NZ4s7dnuUp3BrgGIi36qaQ4QB3VF6IFWV7CxiC9tNWFOYtEKul"
-ACCESS_TOKEN = "1893987822-f1SDVQ24H2fZbmkhMKB4Q6DTiwVAiZhbTZGiDXQ"
-ACCESS_TOKEN_SECRET = "1PJSOanZyi8zFkUVViNKR2mWMYXECnrZhqoDOaKoAYlgM"
+with open('twitter_credentials.json', 'r') as file:  
+    creds = json.load(file)
 
 tweets=[]
 
@@ -29,9 +28,8 @@ class MyStreamer(TwythonStreamer):
         #self.disconnect()
         
         
-stream = MyStreamer(CONSUMER_KEY, CONSUMER_SECRET,ACCESS_TOKEN,ACCESS_TOKEN_SECRET)
+stream = MyStreamer(creds['CONSUMER_KEY'], creds['CONSUMER_SECRET'],creds['ACCESS_TOKEN'],creds['ACCESS_TOKEN_SECRET'])
 stream.statuses.filter(track=['is'])
-
 
 
 cleaned_tweets=[]
