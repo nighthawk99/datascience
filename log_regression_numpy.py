@@ -7,26 +7,14 @@ Created on Tue Dec 18 12:43:21 2018
 
 #%matplotlib inline
 import numpy as np # imports a fast numerical programming library
-import scipy as sp #imports stats functions, amongst other things
-import matplotlib as mpl # this actually imports matplotlib
-import matplotlib.cm as cm #allows us easy access to colormaps
 import matplotlib.pyplot as plt #sets up plotting under plt
 import pandas as pd #lets us handle data as dataframes
-import math
-
-#sets up pandas table display
-#pd.set_option('display.width', 500)
-#pd.set_option('display.max_columns', 100)
-#pd.set_option('display.notebook_repr_html', True)
-
-import seaborn as sns #sets up styles and gives us more plotting options
-
 
 def sigmoid(x):
     return 1/(1+np.exp(-x))
 
 def costFunction(theta,x,y):
-    ssize = df_x.shape[0]
+    ssize = y.shape[0]
     size_theta = theta.shape[0]
     cF = (-y.dot(np.log(sigmoid(x.dot(theta)))) - (1-y).dot(np.log(1-sigmoid(x.dot(theta))))) /ssize
     x_split = np.hsplit(x, size_theta)
@@ -36,7 +24,6 @@ def costFunction(theta,x,y):
 
 def gradientDesc(maxIter, precision, init_theta, x,y,stepmult):
     stepSizes =[]
-    costF=0
     prev_stepSize =1
     costF_list = []
     theta_list=[]
@@ -83,7 +70,7 @@ print("Iterations: " + str(gD[2]))
 print("Theta: " + str(gD[1]))
 
 plt.plot(gD[3][2:], color='green', marker ='o')
-plt.ylim(0,0.00001)
+plt.ylim(0,0.0000000000001)
 plt.show()
 
 y_intercept = (0.5-theta[0])/theta[2]
