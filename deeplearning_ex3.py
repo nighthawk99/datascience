@@ -24,7 +24,6 @@ def feedForward(x,neural_network): #x has no bias term, neural_network has bias 
         activation = np.hstack([np.ones((activation_size,1)),activation])
         activation = sigmoid(activation.dot(layer.T))
         activations_list.append(activation)
-        print(1)
     return activations_list    
 
 def makePrediction(x,y, neural_network):
@@ -51,7 +50,6 @@ def showPredictions(x,guesses):
     return 0
 
 def showSelect(x,guesses,which):
-    i=0
     for i in which:
         xr=np.reshape(x[i],(20,20))
         plt.imshow(xr.T, cmap="gray")
@@ -84,7 +82,7 @@ neural_network = list([weight_set1, weight_set2])
 test = makePrediction(x,y,neural_network)
 showPredictions(x,test[0])
 wrongs = findErrorPredictions(test[0],y)
-showSelect(x,test[0],wrongs)
+showSelect(x,test[0],wrongs[55:58])
 
 
 #activations_list = []

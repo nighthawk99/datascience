@@ -26,7 +26,7 @@ y=data['y']
 def displayData(data,nrows,ncols):
 
     x_all = np.array([np.zeros(ncols*20)])
-    rowsint = [randint(0,500) for x in range(1,ncols+1)]
+    rowsint = [randint(0,500) for l in range(1,ncols+1)]
     for i in rowsint:
         xr=np.reshape(x[(i-1)*ncols],(20,20))
         for j in range(1,ncols):
