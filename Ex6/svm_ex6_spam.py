@@ -69,6 +69,14 @@ def getVocabDict():
             a=line.split()
             vocab[a[1]]=a[0]
     return vocab
+
+def getReverseVocabDict():
+    with open('data/ex6/vocab.txt') as reader:
+        vocab = {}
+        for line in reader:
+            a=line.split()
+            vocab[a[0]]=a[1]
+    return vocab
     
 def findInDict(dic, key):
     if key in dic:
@@ -97,19 +105,29 @@ def plotDecisionBoundary(x,y, model):
     plt.ylim(np.min(y), np.max(y)) 
     plt.show()
     
+def returnKeyforValue(dict, value):
+    goalKey = ""
+    for k,v in dict.items():
+        if(int(v) == value):
+            goalKey = k
+    return goalKey
+            
+            
 dataTrain = loadmat('data/ex6/spamTrain.mat')
 xtrain = dataTrain['X']
 ytrain = dataTrain['y']
 
-dataTest = loadmat('data/ex6/spamTest.mat')
+#dataTest = loadmat('data/ex6/spamTest.mat')
 xtest = dataTest['Xtest']
 ytest = dataTest['ytest']
 
+vocabList = getVocabDict()
+reverseVocabDict = getReverseVocabDict()
 
 #Linear
 kern='linear'
 ytrain = ytrain.flatten()
-C=1
+C=0.1
 #Note that sklearn svm adds the intercept coefficient by itself
 svm_= svm.SVC(C,kernel=kern)
 svm_.fit(xtrain,ytrain)
@@ -119,11 +137,19 @@ print("Linear:")
 print(accuracy_train)
 print(accuracy_test)
 
+coeff = (svm_.coef_).ravel()
+sortedCoeff = coeff.argsort()[::-1]
+
+topSpam = [reverseVocabDict[str(i)] for i in sortedCoeff[0:14]]
+topClean = [reverseVocabDict[str(i)] for i in sortedCoeff[-15:]]
+print(topSpam)
+print(topClean)
+
 #Gaussian
 
 kern='rbf'
 ytrain = ytrain.flatten()
-C=1
+C=0.1
 sigma=0.5
 #Note that sklearn svm adds the intercept coefficient by itself
 svm_= svm.SVC(C,kernel=kern,gamma=math.pow(sigma,-2))
@@ -133,3 +159,14 @@ accuracy_test = float(sum(svm_.predict(xtest)==ytest.ravel()))/float(len(xtest))
 print("Gaussian:")
 print(accuracy_train)
 print(accuracy_test)
+
+coeff = (svm_.coef_).ravel()
+sortedCoeff = coeff.argsort()[::-1]
+
+topSpam = [reverseVocabDict[str(i)] for i in sortedCoeff[0:14]]
+topClean = [reverseVocabDict[str(i)] for i in sortedCoeff[-15:]]
+print(topSpam)
+print(topClean)
+
+readTrain = np.where(xtrain[0] == 1)
+testMail = [returnKeyforValue(vocabList,i) for i in readTrain[0]]
