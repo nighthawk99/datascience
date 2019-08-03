@@ -143,9 +143,8 @@ kMeansAlg(X,kMax=3,nIter=5,nInits=10)
     
 ######  
 
-mapImagetoProxy('data/ex7/bird_small.png',kMax=16,nIter=5,nInits=3)
-mapImagetoProxy('data/ex7/boyang.png',kMax=10,nIter=7,nInits=3)
-
+#mapImagetoProxy('data/ex7/bird_small.png',kMax=16,nIter=5,nInits=3)
+mapImagetoProxy('data/ex7/boyang.png',kMax=4,nIter=7,nInits=3)
 
 
     
